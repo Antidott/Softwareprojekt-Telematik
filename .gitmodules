@@ -1,0 +1,3 @@
+[submodule "multizone-sdk"]
+	path = multizone-sdk
+	url = https://github.com/hex-five/multizone-sdk.git
