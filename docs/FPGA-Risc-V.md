@@ -1,0 +1,14 @@
+# Text zur Presentation 
+- **Was ist ein FPGA**
+- **Was ist Risc-V**
+- **Tool and Frameworks die wir verwenden**
+## FPGA
+FPGA ist eine Abkürzung für Field Programmable Gate Array und ist ein programmierbarer integrierter Schaltkreis (IC), der in der digitalen Elektronik verwendet wird. Im Gegensatz zu anderen integrierten Schaltkreisen, die für spezifische Anwendungen entwickelt werden, kann ein FPGA durch den Benutzer programmiert und konfiguriert werden, um spezifische logische Schaltungen und Funktionen auszuführen. Ein FPGA besteht aus einer Matrix von programmierbaren Logikblöcken und Verbindungen zwischen diesen Blöcken. Diese Logikblöcke können kombiniert und angeordnet werden, um verschiedene logische Schaltungen zu erstellen. Die Programmierung der Logikblöcken kann je nach FPGA unterschiedlich gelöst werden. Man kann zwischen Methoden unterscheiden, die es ermöglichen, den FPGA mehrmals zu programmieren, und Methoden, die nur eine einmalige Programmierung zulassen. Bei den mehrmals programmierbaren FPGAs wird die Konfiguration in Speicherzellen gespeichert. Durch die Programmierung der Verbindungen können die logischen Schaltungen auf unterschiedliche Weise miteinander verbunden werden, um komplexere Funktionen/Schaltungen zu erstellen, wie Mikroprozessoren. So ist es auch möglich Risc-V in einem FPGA abzubilden.
+## Risc-V
+Dabei ist Risc-V eine Befehlssatzarchitektur, die sich auf das Designprinzip des Reduced Instruction Set Computers (RISC) stützt. Dabei ist es ein offener Standard, welcher der freizügigen BSD-Lizenz unterliegt. Das bedeutet, dass RISC-V nicht patentiert ist und frei verwendet werden darf. Eine Befehlssatzarchitektur spezifiziert das Verhalten des Prozessors für die Software durch enthaltende Instruktionen. RISC hat dabei reduzierte Anzahl von Instruktionen, im gegensatz zu CISC.
+## Tool and Frameworks
+Um das FPGA mit Bitstreams zu flashen benutzen wir die Software Vivado, da der Bitstreamsformat den der FPGA erwartet nicht Open Source ist. Durch Vivado wird die generierte Konfigurationsdatei in den Bitstreamformat umgewandelt und ans FPGA gesendet. 
+RISC V GNU Toolchain benutzen wir damit der Bootloader für das FPGA kompeliert wird.
+MultiZone Trusted Firmware benutzen wir um Sicherheit und Trennung durch Zonen für Risc-V zu gewährleisten.
+Für Github haben wir uns entschieden, da es jedem relativ egal war, da Gitlab wie auch Github auf git basieren. (Natürlich können bei github Leute zugreifen die nicht von der FU intern sind.) Für mich persönlich war der Grund, dass ich mit meinem iPad über VS Code Web mit Github arbeiten kann, da es bei Gitlab nicht funktioniert.
+Für Discord haben wir uns Entschieden, da es gute Kommunikation zwischen den Gruppen und den Organisatoren, ob per Video oder Chat, bittet. 
