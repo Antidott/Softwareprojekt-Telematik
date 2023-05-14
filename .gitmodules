@@ -1,3 +1,6 @@
 [submodule "multizone-sdk"]
 	path = multizone-sdk
 	url = https://github.com/hex-five/multizone-sdk.git
+[submodule "multizone-fpga"]
+	path = multizone-fpga
+	url = https://github.com/hex-five/multizone-fpga.git
