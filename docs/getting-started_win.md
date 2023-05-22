@@ -9,7 +9,9 @@
 
 4. Start Oracle VM VirtualBox and create a new VM with die ISO-FIle as Boot Media to install Ubuntu.
 
-5. Update System with the command ```sudo apt update```
+6. Install the updates from the update management.
+
+5. Update System with the command ```sudo apt update```.
 
 ## Install Vivado
 
