@@ -29,7 +29,7 @@ Then follow the installation program step by step.
 
 ### Install Board FIles
 
-The installation also does not include necessary board files. The repository with that Board files have to be cloned from [Github](https://github.com/Xilinx/XilinxBoardStore) and copy into `<Vivado Install>\<Vivado_version>\data\xhub\boards\XilinxBoardStore\boards\Xilinx\`, as instructed [here](https://support.xilinx.com/s/article/The-board-file-location-with-the-latest-Vivado-tools?language=en_US).
+The installation also does not include necessary board files. The repository with that Board files have to be cloned from [Github](https://github.com/Xilinx/XilinxBoardStore) and copy into `<Vivado Install>\<Vivado_version>\data\xhub\boards\XilinxBoardStore\boards\`, as instructed [here](https://support.xilinx.com/s/article/The-board-file-location-with-the-latest-Vivado-tools?language=en_US).
 
 ## Install RISC-V Toolchain
 
