@@ -25,8 +25,23 @@ The installation also does not include necessary board files. They have to be ma
 From the [multizone-fpga/README](https://github.com/hex-five/multizone-fpga#risc-v-toolchain):
 
 ```sh
+## From within the directory in which the RISCV toolchain should be installed
 wget https://hex-five.com/wp-content/uploads/riscv-gnu-toolchain-20210618.tar.xz
 tar -xvf riscv-gnu-toolchain-20210618.tar.xz
+## Set env variable 
+export RISCV=$PWD/riscv-gnu-toolchain-20210618
+```
+
+## Install OpenOCD on chip debugger
+
+From the [multizone-sdk/README](https://github.com/hex-five/multizone-sdk):
+
+```sh
+## From within the directory in which openOCD should be installed
+wget https://hex-five.com/wp-content/uploads/riscv-openocd-20210807.tar.gz
+tar -xvf riscv-openocd-20210807.tar.gz
+## Set env variable 
+export OPENOCD=$PWD/riscv-openocd-20210807
 ```
 
 ## Other prerequisites
@@ -54,7 +69,6 @@ git clone https://github.com/hex-five/multizone-fpga.git
 cd multizone-fpga
 git submodule update --init --recursive --jobs 8
 export PATH=$PATH:<vivado_install_path>/bin
-export RISCV=~/riscv-gnu-toolchain-20210618
 ```
 
 Some of the git submodules are referenced by `git@...` urls, which sometimes can cause issues. If that's the case, configure git to replace the url with an `http` address: `git config --global --unset url."https://".insteadOf git://`. Note that unfortunately for some modules no `https` address exists, so you might need to first execute the `git submodule update` without the mentioned git config and then again with it.
@@ -83,3 +97,41 @@ make -f Makefile.x300arty35devkit mcs
 ```
 
 _Note: I had the same issue as <https://github.com/sifive/freedom/issues/96>, where the `BootRom` was not found. As also described in that issue, I was able to solve it by simple removing the `multizone-fpga` folder and re-cloning with the `submodule update --init --recursive` command. I don't know what the actual issue behind this is._
+
+## Building the hexfive/multizone-sdk example application
+
+The instructions are based on [multizone-sdk/README](https://github.com/hex-five/multizone-sdk/blob/147d3f0eae539b767c2272efd67b220ba8ef6b67/README.md)
+
+### Arch Prerequisites
+
+- Java (see above, although here the version does not matter)
+- Arch packages:
+
+```sh
+pacman -S --needed make hidapi libftdi
+```
+
+- AUR package: `ncurses5-compat-libs`
+
+### Linux USB udev rules
+
+Create/ edit `/etc/udev/rules.d/99-openocd.rules`
+
+```sh
+# Future Technology Devices International, Ltd FT2232C Dual USB-UART/FIFO IC
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403",ATTRS{idProduct}=="6010", MODE="664", GROUP="plugdev"
+SUBSYSTEM=="usb", ATTR{idVendor} =="0403",ATTR{idProduct} =="6010", MODE="664", GROUP="plugdev"
+
+# Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403",ATTRS{idProduct}=="6001", MODE="664", GROUP="plugdev"
+SUBSYSTEM=="usb", ATTR{idVendor} =="0403",ATTR{idProduct} =="6001", MODE="664", GROUP="plugdev"
+
+# Olimex Ltd. ARM-USB-TINY-H JTAG interface
+SUBSYSTEM=="tty", ATTRS{idVendor}=="15ba",ATTRS{idProduct}=="002a", MODE="664", GROUP="plugdev"
+SUBSYSTEM=="usb", ATTR{idVendor} =="15ba",ATTR{idProduct} =="002a", MODE="664", GROUP="plugdev"
+
+# SiFive HiFive1 Rev B00 - SEGGER
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1366",ATTRS{idProduct}=="1051", MODE="664", GROUP="plugdev
+```
+
+In order order to enable access to serial and debug interface without root permissions, add the current user to the `plugdev` and `dialout` groups (see Freedom Studio User Manual 2020-11, page 165 - Enable Access to USB Devices).
