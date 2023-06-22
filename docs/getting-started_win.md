@@ -36,11 +36,39 @@ The installation also does not include necessary board files. The repository wit
 From the [multizone-fpga/README](https://github.com/hex-five/multizone-fpga#risc-v-toolchain):
 
 ```sh
+## From within the directory in which the RISCV toolchain should be installed
 wget https://hex-five.com/wp-content/uploads/riscv-gnu-toolchain-20210618.tar.xz
 tar -xvf riscv-gnu-toolchain-20210618.tar.xz
 ```
 
+## Install OpenOCD on chip debugger
+
+From the [multizone-sdk/README](https://github.com/hex-five/multizone-sdk):
+
+```sh
+## From within the directory in which openOCD should be installed
+wget https://hex-five.com/wp-content/uploads/riscv-openocd-20210807.tar.gz
+tar -xvf riscv-openocd-20210807.tar.gz
+```
+
 ## Other prerequisites
+
+### Linux prerequisites
+
+```sh
+sudo apt update
+sudo apt install make gtkterm libhidapi-dev libftdi1-2
+```
+
+### Ubuntu 18.04 LTS additional dependency
+
+**For biulding multizone-sdk**
+
+```sh
+sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ focal main universe"
+sudo apt update
+sudo apt install libncurses-dev
+```
 
 ### JDK
 
@@ -65,6 +93,28 @@ Building the bitstream requires Python to be installed.
 ```sh
 sudo apt install python-is-python3
 ```
+
+### Linux USB udev rules
+
+```sh
+sudo vi /etc/udev/rules.d/99-openocd.rules
+
+# Future Technology Devices International, Ltd FT2232C Dual USB-UART/FIFO IC
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403",ATTRS{idProduct}=="6010", MODE="664", GROUP="plugdev"
+SUBSYSTEM=="usb", ATTR{idVendor} =="0403",ATTR{idProduct} =="6010", MODE="664", GROUP="plugdev"
+
+# Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403",ATTRS{idProduct}=="6001", MODE="664", GROUP="plugdev"
+SUBSYSTEM=="usb", ATTR{idVendor} =="0403",ATTR{idProduct} =="6001", MODE="664", GROUP="plugdev"
+
+# Olimex Ltd. ARM-USB-TINY-H JTAG interface
+SUBSYSTEM=="tty", ATTRS{idVendor}=="15ba",ATTRS{idProduct}=="002a", MODE="664", GROUP="plugdev"
+SUBSYSTEM=="usb", ATTR{idVendor} =="15ba",ATTR{idProduct} =="002a", MODE="664", GROUP="plugdev"
+
+# SiFive HiFive1 Rev B00 - SEGGER
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1366",ATTRS{idProduct}=="1051", MODE="664", GROUP="plugdev
+```
+A reboot may be necessary for these changes to take effect.
 
 ## Building the hexfive/multizone-fpga bitstream
 
@@ -102,3 +152,19 @@ Finally, build the bitstream:
 ```sh
 make -f Makefile.x300arty35devkit mcs
 ```
+
+## Building the hexfive/multizone-sdk example application
+
+**Instructions from the repo README**:
+
+```sh
+cd ~
+git clone https://github.com/hex-five/multizone-sdk.git
+cd ~/multizone-sdk
+export RISCV=~/riscv-gnu-toolchain-20210618
+export OPENOCD=~/riscv-openocd-20210807
+export BOARD=X300
+make 
+make load
+```
+
