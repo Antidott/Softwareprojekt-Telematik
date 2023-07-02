@@ -27,6 +27,9 @@ chmod +x <installer>.bin && sudo ./<installer>.bin
 ```
 Then follow the installation program step by step.
 
+Note: If Vivado was installed via the Unified Installer, in order to let the board recognized correctly, the cable drivers have to be installed manually like described here:
+	https://digilent.com/reference/programmable-logic/guides/install-cable-drivers
+
 ### Install Board FIles
 
 The installation also does not include necessary board files. The repository with that Board files have to be cloned from [Github](https://github.com/Xilinx/XilinxBoardStore) and copy into `<Vivado Install>\<Vivado_version>\data\xhub\boards\XilinxBoardStore\boards\`, as instructed [here](https://support.xilinx.com/s/article/The-board-file-location-with-the-latest-Vivado-tools?language=en_US).
