@@ -27,8 +27,9 @@ chmod +x <installer>.bin && sudo ./<installer>.bin
 ```
 Then follow the installation program step by step.
 
-Note: If Vivado was installed via the Unified Installer, in order to let the board recognized correctly, the cable drivers have to be installed manually like described here:
-	https://digilent.com/reference/programmable-logic/guides/install-cable-drivers
+### Install Cable Drivers
+If Vivado was installed via the Unified Installer, in order to let the board recognized correctly, the cable drivers have to be installed manually like described here:
+https://digilent.com/reference/programmable-logic/guides/install-cable-drivers
 
 ### Install Board FIles
 
