@@ -10,26 +10,58 @@ See [Freedom E300 Arty FPGA Dev Kit Getting Started Guide](./SiFive-E310-arty-ge
 - 10 Jumper Cables (either male-to-female, or male-to-male with extra female-to-female ribbon cable)
 - micro-usb cable (USB Type micro-B)
 
-**Setup**:
+Connect the USB interface with the micro-usb cable.
 
-- Connect the USB interface with the micro-usb cable
-- Connect the Debugger as described in the getting started guide linked above
+Connect the Debugger as described in the getting started guide linked above:  
+_(Please ignore that due to formatting the first rows in each below table is marked as table head - it does not have a meaning and is simply the first row.)_
 
-_**Note:** If an extra ribbon cable is used with the Olimex head, the pinout needs to be mirrored so that if one side is connected with the Olimex head, the pinout on the other side needs to be like the below table:_  
-_(Please ignore that due to formatting the first row is marked as table head - it does not have a meaning and is simply the first row._  
-_**Note that the Notch is on the right side here**)_
+On the Arty Board JD PMOD Header the jumper cables should be connected as follows:
 
-2 : VREF (brown) | 1 : VREF (red) | -
--|-|-
-4  | 3 : nTRST (orange) |
-6  | 5 : TDI (yellow)   |
-8  | 7 : TMS (green)    |
-10 | 9 : TCK (blue)     | NOTCH
-12 | 11                 | NOTCH
-14 | 13 : TDO (purple)  |
-16 | 15 : nRST (grey)   |
-18 | 17                 |
-20 | 19                 |
+![Arty Board PMOD connector front view](./arty_pmod_connector.png)
+
+square pad  | 1 : TDO (purple)     | 7 : TDI (yellow)
+------------|----------------------|----------------
+.           | 2 : nTRST (orange)   | 8 : TMS (green)
+.           | 3 : TCK (blue)       | 9 : nRST (grey)
+.           | 4                    | 10
+“GND”       | 5 : GND (black)      | 11 : GND (white)
+“VCC”       | 6 : VREF (brown)     | 12 : VREF (red)
+
+On the Olimex head the pinout depends on whether an extra ribbon cable is used or not!
+
+- Without extra cable  
+  => only with male-to-female jumpers between board and olimex head:
+
+.     | 1 : VREF (red)     | 2 : VREF (brown)
+------|--------------------|----------------
+.     | 3 : nTRST (orange) | 4
+.     | 5 : TDI (yellow)   | 6
+.     | 7 : TMS (green)    | 8
+NOTCH | 9 : TCK (blue)     | 10
+NOTCH | 11                 | 12
+.     | 13 : TDO (purple)  | 14 : GND (black)
+.     | 15 : nRST (grey)   | 16 : GND (white)
+.     | 17                 | 18
+.     | 19                 | 20
+.     | (LED)              |
+
+- With extra cable  
+  => ribon cable connected to Olimex head + male-to-male jumper cables  
+  -> the pinout on the ribbon cable needs to be mirrored:
+ (_Note that the Notch is on the **right** side here_)
+
+
+2 : VREF (brown)| 1 : VREF (red)     | -
+----------------|--------------------|------
+4               | 3 : nTRST (orange) |
+6               | 5 : TDI (yellow)   |
+8               | 7 : TMS (green)    |
+10              | 9 : TCK (blue)     | NOTCH
+12              | 11                 | NOTCH
+14 : GND (black)| 13 : TDO (purple)  |
+16 : GND (white)| 15 : nRST (grey)   |
+18              | 17                 |
+20              | 19                 |
 
 ### Steps
 
