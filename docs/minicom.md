@@ -10,8 +10,8 @@ Identify port via the `dmesg | grep tty`command
 3. enter settings for serial connection
 4. set serial device: `/dev/ttyXXX`
 5. set Bps/Par/Bits: `115200 8N1`
-6. Hardware Flow Control: No
-7. Software Flow Control: Yes
+6. set Hardware Flow Control: No
+7. set Software Flow Control: Yes
 8. exit serial settings
 9. save setup as dfl
 
