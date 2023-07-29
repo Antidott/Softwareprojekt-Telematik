@@ -31,4 +31,21 @@ More information on this topics [here](https://github.com/hex-five/multizone-sdk
 
 ![update procedure](https://raw.githubusercontent.com/Antidott/Softwareprojekt-Telematik/main/docs/update_mechanism.png)
 
-[Work in progress]
+It was important for us that the update procedure is capable of replacing any application in the corresponding zone, regardless of whether the service/request pattern is implemented or, for example, an endlessly running application with which no classic message exchange is possible. Therefore, we decided to process the messages via interrupts.
+
+For this, there is an interrupt handler that is triggered as soon as a new message arrives.
+
+The process is as follows:
+
+1. Zone1 receives 'update_bin' command via uart
+1.2. Z1 sets internal status that controls the behavior of the UART-ISR
+2. SP sends binary
+3. Z1 loops until all chunks of the update have been received and written into Z1's local buffer
+4. Zone4 is informed about the upcoming update
+5. Z4 notifies Z1 that the update can be received
+6. Z1 sends the update in a loop until Z4 has received everything
+7. Z4 writes the update into the "shared_buffer"
+8. Z4 sets the program counter to the start of the "shared_buffer"
+
+## Evaluation / Test Results
+The current implementation is not functional at the moment and requires further fine-tuning. The reception of messages via interrupts is possible, as is the manual setting of program counters. However, the problem is receiving all chunks. While the first message from Z1 to Z4 is correctly received by the ISR, the subsequent messages go nowhere. Here, one could consider a simplified experimental setup that assumes that the update fits into exactly one message, or one removes the re-notification ('get_update') and starts transmitting the update immediately after the 'update_available' notification.
