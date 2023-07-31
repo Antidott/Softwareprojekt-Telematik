@@ -37,7 +37,7 @@ Security Architecture
 Provides Trusted Execution Environment for RISCV (among other features)
   - "hardware-enforced software-defined separation of multiple functional areas within the same chip"
 - Requirements:
-    - "M" and "U" priviledge modes (vs other TEE implementations that also require the "S" mode, which is usually only present in larger systems)
+    - "M" and "U" privilege modes (vs other TEE implementations that also require the "S" mode, which is usually only present in larger systems)
     - RISC-V Physical Memory Protection (PMP)
 - Multizone TEE (=Multizone "nanoKernel") runs in M mode, uses PMP to protect memory
 - User code is implemented in Zones that run in U mode (-> single privilege mode); `multizone.fpg` file defines:
